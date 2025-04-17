@@ -1,10 +1,10 @@
 const { ipcRenderer } = require('electron');
-//const { conexion_database } = require('./database.js');
-
+const { poblar_database } = require('./database.js');
+poblar_database();
 ipcRenderer.send('mostrar-mensaje', "ENTRA EN JS");
 
 document.addEventListener("DOMContentLoaded", () => {
-    const boton = document.getElementById("btn-mensaje-pruebas");
+    const boton = document.getElementById("btn-poblar-db");
     const div = document.getElementById("mensaje-pruebas");
 
     boton.addEventListener('click', mensajesPruebas);
