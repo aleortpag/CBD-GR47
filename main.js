@@ -33,5 +33,5 @@ ipcMain.on("mostrar-mensaje", (event, texto) => {
 });
 
 ipcMain.on("mostrar-error", (event, texto) => {
-  console.log('\x1b[31m' + error + '\x1b[0m')
+  console.log('\x1b[31m' + texto + '\x1b[0m')
 });
