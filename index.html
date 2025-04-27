@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mi App con Electron</title>
-  </head>
-  <body>
-    <h1>¡Hola desde Electron!</h1>
-    <button id="btn-poblar-db">Poblar base de datos</button>
-    <div id="div-resultados"></div>
 
-    <script src="./renderer.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>Buscador de videojuegos con Electron</title>
+</head>
+
+<body>
+  <header>
+    <nav class="menu">
+      <h1>GameFinder</h1>
+      <button id="btn-mostrar-todos-juegos">Mostrar todos los juegos</button>
+      <button id="btn-buscar-juegos">Buscar Juegos</button>
+      <button id="btn-poblar-db">Poblar base de datos</button>
+    </nav>
+  </header>
+  <div id="div-formulario-busqueda"></div>
+  <div id="div-resultados"></div>
+  <div id="div-detalles"></div>
+
+  <script src="./renderer.js"></script>
+</body>
+
 </html>
