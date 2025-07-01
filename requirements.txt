@@ -1,4 +1,5 @@
-pymongo
-pandas
-zarr
-numpy
+pandas>=2.2.2
+numpy>=1.26.4
+pymongo>=4.6.3
+tiledb>=0.26.2
+pyarrow>=1.0
