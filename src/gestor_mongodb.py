@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from src.utils import pintar_verde, pintar_amarillo
+from src.utils import pintar_verde
 import time
 
 client = MongoClient("mongodb://localhost:27017/")
@@ -16,6 +16,52 @@ def leer_todo_mongo():
         end = time.time()
         tiempo_ejecucion = end - start
         pintar_verde("Tiempo de ejecución en Lectura completa de MongoDB: "+str(tiempo_ejecucion)+" segundos")
+    except Exception as e:
+        print(e)
+
+def leer_temperatura_mayor_30_mongo():
+    try:
+        start = time.time()
+
+        query = {"Temperature_C": {"$gt": 30}}
+        res = list(collection.find(query))
+        pintar_verde("Resultados busqueda temperatura mayor que 30 en MongoDB: "+str(len(res)))
+
+        end = time.time()
+        tiempo_ejecucion = end - start
+        pintar_verde("Tiempo de ejecución en Lectura temperatura mayor que 30 en MongoDB: "+str(tiempo_ejecucion)+" segundos")
+    except Exception as e:
+        print(e)
+
+def leer_tiempo_despejado_mongo():
+    try:
+        start = time.time()
+
+        query = {"Summary": "Clear"}
+        res = list(collection.find(query))
+        pintar_verde("Resultados busqueda tiempo despejado en MongoDB: "+str(len(res)))
+
+        end = time.time()
+        tiempo_ejecucion = end - start
+        pintar_verde("Tiempo de ejecución en Lectura tiempo despejado en MongoDB: "+str(tiempo_ejecucion)+" segundos")
+    except Exception as e:
+        print(e)
+
+def leer_varias_condiciones_mongo():
+    try:
+        start = time.time()
+
+        query = {
+            "Humidity": {"$lt": 0.4},
+            "Wind_Speed_kmh": {"$gt": 15},
+            "Pressure_millibars": {"$lt": 1000}
+}
+        res = list(collection.find(query))
+        pintar_verde("Resultados busqueda varias condiciones en MongoDB: "+str(len(res)))
+
+        end = time.time()
+        tiempo_ejecucion = end - start
+        pintar_verde("Tiempo de ejecución en Lectura varias condiciones en MongoDB: "+str(tiempo_ejecucion)+" segundos")
     except Exception as e:
         print(e)
 

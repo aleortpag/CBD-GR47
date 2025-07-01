@@ -12,7 +12,7 @@ def poblar_databases():
         datos["Formatted Date"] = datos["Formatted Date"].dt.tz_convert(None)
         datos["Formatted Date"] = datos["Formatted Date"].dt.strftime("%Y-%m-%d %H:%M:%S")
         datos = datos.drop_duplicates(subset=["Formatted Date"])
-        datos = datos.rename(columns=lambda x: x.strip().replace(" ", "_").replace("(", "").replace(")", ""))
+        datos = datos.rename(columns=lambda x: x.strip().replace(" ", "_").replace("(", "").replace(")", "").replace("/", ""))
     except (FileNotFoundError, pd.errors.ParserError) as e:
         print(e)
     else:

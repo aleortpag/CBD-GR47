@@ -1,8 +1,7 @@
-import pandas as pd
 import numpy as np
 import time
 import tiledb
-from src.utils import pintar_verde, pintar_amarillo
+from src.utils import pintar_amarillo
 
 tilepath = './datos_meteorologicos'
 
@@ -25,17 +24,45 @@ def leer_temperatura_mayor_30_tile():
         start = time.time()
 
         with tiledb.SparseArray(tilepath, mode="r") as A:
-            cond = "Temperature_C > 30"
-            res = A.query(cond=cond).df[:]
-            #print(res)
+            c = "Temperature_C > 30"
+            res = A.query(cond=c).df[:]
+            pintar_amarillo("Resultados busqueda temperatura mayor que 30 en TileDB: "+str(len(res)))
 
         end = time.time()
         tiempo_ejecucion = end - start
         pintar_amarillo("Tiempo de ejecución en Lectura temperatura mayor que 30 en TileDB: "+str(tiempo_ejecucion)+" segundos")
     except Exception as e:
         print(e)
-    else:
-        pintar_verde("Lectura temperaturas mayor que 30 en TileDB")
+
+def leer_tiempo_despejado_tile():
+    try:
+        start = time.time()
+
+        with tiledb.SparseArray(tilepath, mode="r") as A:
+            c = "Summary == 'Clear'"
+            res = A.query(cond=c).df[:]
+            pintar_amarillo("Resultados busqueda tiempo despejado en TileDB: "+str(len(res)))
+
+        end = time.time()
+        tiempo_ejecucion = end - start
+        pintar_amarillo("Tiempo de ejecución en Lectura tiempo despejado en TileDB: "+str(tiempo_ejecucion)+" segundos")
+    except Exception as e:
+        print(e)
+
+def leer_varias_condiciones_tile():
+    try:
+        start = time.time()
+
+        with tiledb.SparseArray(tilepath, mode="r") as A:
+            c = "Humidity < 0.4 and Wind_Speed_kmh > 15 and Pressure_millibars < 1000"
+            res = A.query(cond=c).df[:]
+            pintar_amarillo("Resultados busqueda varias condiciones en TileDB: "+str(len(res)))
+
+        end = time.time()
+        tiempo_ejecucion = end - start
+        pintar_amarillo("Tiempo de ejecución en Lectura varias condiciones en TileDB: "+str(tiempo_ejecucion)+" segundos")
+    except Exception as e:
+        print(e)
 
 def poblar_tile(datos):
     try:
